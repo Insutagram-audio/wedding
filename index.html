@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>우리의 결혼식에 초대합니다</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 구글 폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Serif+KR:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Gowun Dodum', sans-serif; background-color: #FAFAF8; color: #333; }
@@ -16,11 +14,18 @@
         .bg-pink-light { background-color: #FDF5F6; }
         .bg-gold { background-color: #D4A373; }
         .hover-bg-gold:hover { background-color: #c08d5d; }
+        
+        /* 사진 다운로드 방지 보안 CSS */
+        img {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            pointer-events: none;
+        }
     </style>
 </head>
-<body class="max-w-md mx-auto bg-white shadow-xl min-h-screen relative pb-10">
+<body class="max-w-md mx-auto bg-white shadow-xl min-h-screen relative pb-10" oncontextmenu="return false;" ondragstart="return false;" onselectstart="return false;">
 
-    <!-- 메인 타이틀 -->
     <header class="text-center py-24 bg-pink-light">
         <div class="mb-6">
             <h1 class="script text-6xl text-gold mb-4">Jiwon & Minsoo</h1>
@@ -33,7 +38,7 @@
     </header>
 
     <!-- 인사말 -->
-    <section class="py-16 px-8 text-center">
+    <section class="pt-16 pb-10 px-8 text-center">
         <h2 class="script text-4xl text-gold mb-6">Invitation</h2>
         <p class="leading-loose text-gray-600">
             서로가 마주보며 다져온 사랑을<br>
@@ -45,23 +50,86 @@
         </p>
     </section>
 
-    <!-- 갤러리 영역 -->
-    <section class="py-16 px-6 bg-pink-light">
+    <!-- 🌟 새롭게 추가된 부분: 큰 메인 사진 -->
+    <section class="px-6 mb-10 text-center">
+        <div class="rounded-xl overflow-hidden shadow-sm border border-gray-100 max-w-sm mx-auto">
+            <!-- 메인 사진 파일명을 main_photo.jpg 로 해서 GitHub에 함께 올려주세요 -->
+            <img src="main_photo.jpg" alt="웨딩 메인 사진" class="w-full h-auto object-cover" onerror="this.src='https://picsum.photos/400/550?random=100'">
+        </div>
+    </section>
+
+    <!-- 🌟 새롭게 추가된 부분: 혼주 및 신랑신부 성함 -->
+    <section class="pb-16 px-8 text-center text-gray-800">
+        <div class="flex justify-center items-center gap-3 mb-4">
+            <div class="text-lg font-bold">김민철 · 이영희</div>
+            <div class="text-sm text-gray-500 mt-1">의 아들</div>
+            <div class="text-xl font-bold">민수</div>
+        </div>
+        <div class="flex justify-center items-center gap-3">
+            <div class="text-lg font-bold">박성호 · 최미란</div>
+            <div class="text-sm text-gray-500 mt-1">의 &nbsp;딸&nbsp;</div>
+            <div class="text-xl font-bold">지원</div>
+        </div>
+    </section>
+
+    <!-- 🌟 새롭게 추가된 부분: 예식일 달력 -->
+    <section class="py-16 px-8 bg-pink-light text-center border-t border-b border-pink-100">
+        <h2 class="serif text-xl text-gold mb-2 font-bold tracking-widest">2026. 10. 24</h2>
+        <p class="text-sm text-gray-500 mb-8">토요일 오후 1시</p>
+        
+        <div class="max-w-[280px] mx-auto bg-white p-6 rounded-2xl shadow-sm border border-gray-50">
+            <!-- 요일 -->
+            <div class="grid grid-cols-7 gap-2 text-xs font-bold mb-4 border-b pb-3">
+                <div class="text-red-400">일</div>
+                <div class="text-gray-500">월</div>
+                <div class="text-gray-500">화</div>
+                <div class="text-gray-500">수</div>
+                <div class="text-gray-500">목</div>
+                <div class="text-gray-500">금</div>
+                <div class="text-blue-400">토</div>
+            </div>
+            <!-- 날짜 (2026년 10월 기준) -->
+            <div class="grid grid-cols-7 gap-y-4 gap-x-2 text-sm text-gray-700">
+                <!-- 1일이 목요일이므로 앞 4칸 비움 -->
+                <div></div><div></div><div></div><div></div>
+                <div>1</div><div>2</div><div class="text-blue-400">3</div>
+                <div class="text-red-400">4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div class="text-blue-400">10</div>
+                <div class="text-red-400">11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div class="text-blue-400">17</div>
+                <div class="text-red-400">18</div><div>19</div><div>20</div><div>21</div><div>22</div><div>23</div>
+                <!-- 24일 하이라이트 -->
+                <div class="bg-gold text-white rounded-full w-7 h-7 flex items-center justify-center mx-auto shadow-md font-bold -mt-1">24</div>
+                <div class="text-red-400">25</div><div>26</div><div>27</div><div>28</div><div>29</div><div>30</div><div class="text-blue-400">31</div>
+            </div>
+        </div>
+        <p id="ddayText" class="text-sm text-gray-600 mt-8 tracking-wide font-bold"></p>
+    </section>
+
+    <!-- 갤러리 영역 (총 18장) -->
+    <section class="py-16 px-6 text-center">
         <h2 class="script text-4xl text-gold mb-8 text-center">Gallery</h2>
         
         <div id="galleryGrid" class="grid grid-cols-3 gap-2 mb-6">
-            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=1" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
-            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=2" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
-            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=3" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
-            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=4" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
-            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=5" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
-            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=6" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
-            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=7" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
-            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=8" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
-            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=9" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
-            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=10" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
-            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=11" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
-            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=12" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
+            <!-- 1~6 -->
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo1.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo2.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo3.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo4.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo5.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo6.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
+            <!-- 7~12 -->
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo7.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo8.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo9.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo10.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo11.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo12.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
+            <!-- 13~18 -->
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo13.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo14.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo15.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo16.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo17.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
+            <div class="gallery-item group aspect-square overflow-hidden bg-gray-200 cursor-pointer" onclick="openModal(this)"><img src="photo18.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"></div>
         </div>
 
         <div class="text-center">
@@ -72,7 +140,7 @@
     </section>
 
     <!-- 오시는 길 -->
-    <section class="py-16 px-8 text-center">
+    <section class="py-16 px-8 bg-pink-light text-center">
         <h2 class="script text-4xl text-gold mb-6">Location</h2>
         <p class="font-bold text-lg mb-2">더 로맨틱 하우스</p>
         <p class="text-sm text-gray-600 mb-6">서울 강남구 웨딩로 123, 2층 그랜드홀</p>
@@ -82,7 +150,7 @@
     </section>
 
     <!-- 참석 여부 (RSVP) -->
-    <section class="py-16 px-8 bg-pink-light text-center">
+    <section class="py-16 px-8 text-center">
         <h2 class="serif text-2xl text-gold mb-4 font-bold">RSVP</h2>
         <p class="mb-8 text-gray-600 text-sm leading-relaxed">
             결혼식에 참석해주시는 분들께<br>
@@ -95,7 +163,7 @@
     </section>
 
     <!-- 사진 업로드 이벤트 -->
-    <section class="py-16 px-6 text-center">
+    <section class="py-16 px-6 bg-pink-light text-center border-t border-pink-100">
         <h2 class="serif text-2xl text-gold mb-3 font-bold">📸 웨딩 스냅 콘테스트</h2>
         <p class="text-sm text-gray-500 mb-8 leading-relaxed">
             예식 당일, 저희의 아름다운 순간을 담아주세요!<br>
@@ -116,47 +184,36 @@
         </div>
     </section>
 
-    <footer class="text-center pb-8 pt-4 text-gray-400 text-xs">
+    <footer class="text-center pb-8 pt-4 bg-pink-light text-gray-400 text-xs">
         <p>Made with ❤️ for Jiwon & Minsoo</p>
     </footer>
 
-    <!-- 🌟 사진 원본 보기 모달창 (슬라이드/스와이프 기능 추가) -->
+    <!-- 사진 원본 보기 모달창 -->
     <div id="photoModal" class="fixed inset-0 bg-black bg-opacity-95 z-50 hidden flex-col items-center justify-center touch-none">
-        
-        <!-- 뒷 배경 클릭 시 닫기 -->
         <div class="absolute inset-0 z-0" onclick="closeModal()"></div>
-        
-        <!-- 닫기 버튼 -->
         <button class="absolute top-6 right-6 text-white text-5xl font-light hover:text-gray-300 z-50" onclick="closeModal()">&times;</button>
         
-        <!-- 이전 버튼 (모바일에서는 화면 왼쪽 20% 영역을 터치해도 작동) -->
         <div class="absolute left-0 top-0 bottom-0 w-1/5 z-40 flex items-center justify-center cursor-pointer group" onclick="prevImage(event)">
             <span class="text-white text-4xl opacity-40 group-hover:opacity-100 drop-shadow-lg">&#10094;</span>
         </div>
-        
-        <!-- 다음 버튼 (모바일에서는 화면 오른쪽 20% 영역을 터치해도 작동) -->
         <div class="absolute right-0 top-0 bottom-0 w-1/5 z-40 flex items-center justify-center cursor-pointer group" onclick="nextImage(event)">
             <span class="text-white text-4xl opacity-40 group-hover:opacity-100 drop-shadow-lg">&#10095;</span>
         </div>
 
-        <!-- 원본 사진 -->
-        <img id="modalImg" src="" alt="확대사진" class="max-w-[95%] max-h-[95%] object-contain pointer-events-none select-none z-30 transition-opacity duration-200">
+        <img id="modalImg" src="" alt="확대사진" class="max-w-[95%] max-h-[95%] object-contain z-30 transition-opacity duration-200">
     </div>
 
     <!-- 자바스크립트 -->
     <script>
-        // --- 갤러리 및 모달 슬라이드 로직 ---
         let galleryImages = [];
         let currentImageIndex = 0;
 
         document.addEventListener('DOMContentLoaded', () => {
+            // 갤러리 로직
             const items = document.querySelectorAll('.gallery-item');
             const loadMoreBtn = document.getElementById('loadMoreBtn');
-            
-            // 갤러리 내 모든 이미지 태그를 배열로 저장
             galleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
 
-            // 9개까지만 표시
             items.forEach((item, index) => {
                 if(index >= 9) {
                     item.classList.add('hidden');
@@ -166,6 +223,24 @@
             if(items.length <= 9) {
                 loadMoreBtn.classList.add('hidden');
             }
+
+            // 디데이 계산 로직 추가
+            const ddayText = document.getElementById('ddayText');
+            if(ddayText) {
+                const weddingDate = new Date('2026-10-24T00:00:00');
+                const today = new Date();
+                today.setHours(0,0,0,0);
+                const diffTime = weddingDate - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                
+                if(diffDays > 0) {
+                    ddayText.innerHTML = `예식일까지 <span class="text-[#D4A373] text-lg">${diffDays}일</span> 남았습니다.`;
+                } else if (diffDays === 0) {
+                    ddayText.innerHTML = `<span class="text-[#D4A373] text-lg">오늘은 예식일입니다.</span> 축하해주세요!`;
+                } else {
+                    ddayText.innerHTML = `예식이 <span class="text-[#D4A373] text-lg">${Math.abs(diffDays)}일</span> 지났습니다.`;
+                }
+            }
         });
 
         function showAllPhotos() {
@@ -174,8 +249,8 @@
             document.getElementById('loadMoreBtn').classList.add('hidden'); 
         }
 
-        // 모달창 열기
-        function openModal(imgElement) {
+        function openModal(itemElement) {
+            const imgElement = itemElement.querySelector('img'); 
             currentImageIndex = galleryImages.indexOf(imgElement);
             updateModalImage();
             
@@ -185,7 +260,6 @@
             document.body.style.overflow = 'hidden'; 
         }
 
-        // 모달창 닫기
         function closeModal() {
             const modal = document.getElementById('photoModal');
             modal.classList.add('hidden');
@@ -193,32 +267,28 @@
             document.body.style.overflow = 'auto';
         }
 
-        // 모달 이미지 업데이트 (애니메이션 포함)
         function updateModalImage() {
             const modalImg = document.getElementById('modalImg');
-            modalImg.style.opacity = '0.3'; // 전환 효과 시작
+            modalImg.style.opacity = '0.3'; 
             
             setTimeout(() => {
                 modalImg.src = galleryImages[currentImageIndex].src;
-                modalImg.style.opacity = '1'; // 전환 효과 끝
+                modalImg.style.opacity = '1'; 
             }, 100);
         }
 
-        // 다음 사진 보기
         function nextImage(event) {
-            if(event) event.stopPropagation(); // 배경 클릭(닫기) 이벤트 방지
+            if(event) event.stopPropagation(); 
             currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
             updateModalImage();
         }
 
-        // 이전 사진 보기
         function prevImage(event) {
             if(event) event.stopPropagation();
             currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
             updateModalImage();
         }
 
-        // --- 모바일 스와이프(밀어 넘기기) 제스처 인식 ---
         let touchstartX = 0;
         let touchendX = 0;
         const modalElement = document.getElementById('photoModal');
@@ -233,17 +303,16 @@
         }, false); 
 
         function handleGesture() {
-            const threshold = 50; // 이 픽셀 이상 움직여야 스와이프로 인정
+            const threshold = 50; 
             if (touchendX < touchstartX - threshold) {
-                nextImage(); // 왼쪽으로 밀면 다음 사진
+                nextImage(); 
             }
             if (touchendX > touchstartX + threshold) {
-                prevImage(); // 오른쪽으로 밀면 이전 사진
+                prevImage(); 
             }
         }
 
-        // --- 사진 업로드 이벤트 로직 ---
-        // 🚨 아래 SCRIPT_URL에 기존에 성공하셨던 '웹 앱 URL'을 다시 넣어주시는 것 잊지 마세요!
+        // 🚨 여기에 정상 작동했던 구글 Apps Script 웹 앱 URL을 붙여넣으세요!
         const SCRIPT_URL = 'YOUR_WEB_APP_URL_HERE'; 
         
         function readFileAsBase64(file) {
@@ -316,7 +385,7 @@
                 document.getElementById('uploaderName').value = '';
                 fileInput.value = '';
             } else {
-                statusDiv.innerText = `⚠️ ${successCount}장 성공, ${failCount}장 실패했습니다. (용량 초과 의심)`;
+                statusDiv.innerText = `⚠️ ${successCount}장 성공, ${failCount}장 실패했습니다.`;
                 statusDiv.className = 'mt-4 text-center text-sm text-red-500 font-bold';
             }
 
