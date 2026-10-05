@@ -94,7 +94,7 @@
         </a>
     </section>
 
-    <!-- 🌟 사진 업로드 이벤트 (제일 아래로 이동) -->
+    <!-- 사진 업로드 이벤트 -->
     <section class="py-16 px-6 text-center">
         <h2 class="serif text-2xl text-gold mb-3 font-bold">📸 웨딩 스냅 콘테스트</h2>
         <p class="text-sm text-gray-500 mb-8 leading-relaxed">
@@ -120,18 +120,43 @@
         <p>Made with ❤️ for Jiwon & Minsoo</p>
     </footer>
 
-    <!-- 사진 원본 보기 모달창 -->
-    <div id="photoModal" class="fixed inset-0 bg-black bg-opacity-95 z-50 hidden flex-col items-center justify-center touch-none" onclick="closeModal()">
-        <button class="absolute top-6 right-6 text-white text-5xl font-light hover:text-gray-300 z-50">&times;</button>
-        <img id="modalImg" src="" alt="확대사진" class="max-w-[95%] max-h-[95%] object-contain pointer-events-none select-none">
+    <!-- 🌟 사진 원본 보기 모달창 (슬라이드/스와이프 기능 추가) -->
+    <div id="photoModal" class="fixed inset-0 bg-black bg-opacity-95 z-50 hidden flex-col items-center justify-center touch-none">
+        
+        <!-- 뒷 배경 클릭 시 닫기 -->
+        <div class="absolute inset-0 z-0" onclick="closeModal()"></div>
+        
+        <!-- 닫기 버튼 -->
+        <button class="absolute top-6 right-6 text-white text-5xl font-light hover:text-gray-300 z-50" onclick="closeModal()">&times;</button>
+        
+        <!-- 이전 버튼 (모바일에서는 화면 왼쪽 20% 영역을 터치해도 작동) -->
+        <div class="absolute left-0 top-0 bottom-0 w-1/5 z-40 flex items-center justify-center cursor-pointer group" onclick="prevImage(event)">
+            <span class="text-white text-4xl opacity-40 group-hover:opacity-100 drop-shadow-lg">&#10094;</span>
+        </div>
+        
+        <!-- 다음 버튼 (모바일에서는 화면 오른쪽 20% 영역을 터치해도 작동) -->
+        <div class="absolute right-0 top-0 bottom-0 w-1/5 z-40 flex items-center justify-center cursor-pointer group" onclick="nextImage(event)">
+            <span class="text-white text-4xl opacity-40 group-hover:opacity-100 drop-shadow-lg">&#10095;</span>
+        </div>
+
+        <!-- 원본 사진 -->
+        <img id="modalImg" src="" alt="확대사진" class="max-w-[95%] max-h-[95%] object-contain pointer-events-none select-none z-30 transition-opacity duration-200">
     </div>
 
     <!-- 자바스크립트 -->
     <script>
+        // --- 갤러리 및 모달 슬라이드 로직 ---
+        let galleryImages = [];
+        let currentImageIndex = 0;
+
         document.addEventListener('DOMContentLoaded', () => {
             const items = document.querySelectorAll('.gallery-item');
             const loadMoreBtn = document.getElementById('loadMoreBtn');
             
+            // 갤러리 내 모든 이미지 태그를 배열로 저장
+            galleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
+
+            // 9개까지만 표시
             items.forEach((item, index) => {
                 if(index >= 9) {
                     item.classList.add('hidden');
@@ -149,27 +174,77 @@
             document.getElementById('loadMoreBtn').classList.add('hidden'); 
         }
 
+        // 모달창 열기
         function openModal(imgElement) {
+            currentImageIndex = galleryImages.indexOf(imgElement);
+            updateModalImage();
+            
             const modal = document.getElementById('photoModal');
-            const modalImg = document.getElementById('modalImg');
-            
-            modalImg.src = imgElement.src;
-            
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             document.body.style.overflow = 'hidden'; 
         }
 
+        // 모달창 닫기
         function closeModal() {
             const modal = document.getElementById('photoModal');
-            
             modal.classList.add('hidden');
             modal.classList.remove('flex');
             document.body.style.overflow = 'auto';
         }
 
+        // 모달 이미지 업데이트 (애니메이션 포함)
+        function updateModalImage() {
+            const modalImg = document.getElementById('modalImg');
+            modalImg.style.opacity = '0.3'; // 전환 효과 시작
+            
+            setTimeout(() => {
+                modalImg.src = galleryImages[currentImageIndex].src;
+                modalImg.style.opacity = '1'; // 전환 효과 끝
+            }, 100);
+        }
+
+        // 다음 사진 보기
+        function nextImage(event) {
+            if(event) event.stopPropagation(); // 배경 클릭(닫기) 이벤트 방지
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            updateModalImage();
+        }
+
+        // 이전 사진 보기
+        function prevImage(event) {
+            if(event) event.stopPropagation();
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateModalImage();
+        }
+
+        // --- 모바일 스와이프(밀어 넘기기) 제스처 인식 ---
+        let touchstartX = 0;
+        let touchendX = 0;
+        const modalElement = document.getElementById('photoModal');
+
+        modalElement.addEventListener('touchstart', function(event) {
+            touchstartX = event.changedTouches[0].screenX;
+        }, false);
+
+        modalElement.addEventListener('touchend', function(event) {
+            touchendX = event.changedTouches[0].screenX;
+            handleGesture();
+        }, false); 
+
+        function handleGesture() {
+            const threshold = 50; // 이 픽셀 이상 움직여야 스와이프로 인정
+            if (touchendX < touchstartX - threshold) {
+                nextImage(); // 왼쪽으로 밀면 다음 사진
+            }
+            if (touchendX > touchstartX + threshold) {
+                prevImage(); // 오른쪽으로 밀면 이전 사진
+            }
+        }
+
+        // --- 사진 업로드 이벤트 로직 ---
         // 🚨 아래 SCRIPT_URL에 기존에 성공하셨던 '웹 앱 URL'을 다시 넣어주시는 것 잊지 마세요!
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzXtlEk6tzkMgl8hWLC7FcFBjSz8XzbxpKANiStpbB6OjfwtpXOe5u1iMPq0f3N_FY5WQ/exec'; 
+        const SCRIPT_URL = 'YOUR_WEB_APP_URL_HERE'; 
         
         function readFileAsBase64(file) {
             return new Promise((resolve, reject) => {
