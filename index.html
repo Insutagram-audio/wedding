@@ -592,33 +592,16 @@
     </script>
 
     <!-- 🚨 1. 복사해둔 JavaScript 키를 YOUR_KAKAO_APP_KEY 부분에 넣으세요 -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f47559d3c714daa3615d14ac11ed3fe8"></script>
-    
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=62f9288d773cbc72148871e235ea4174"></script>
     <script>
-        // 🚨 2. 예식장의 실제 위도(lat)와 경도(lng) 숫자로 변경하세요
-        var venueLat = 37.549; // 예시 위도
-        var venueLng = 126.938; // 예시 경도
-    
-        var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
-        var mapOption = { 
-            center: new kakao.maps.LatLng(venueLat, venueLng), // 지도의 중심좌표
-            level: 4 // 지도의 확대 레벨 (숫자가 작을수록 확대됨)
-        };
-    
-        // 지도를 생성합니다
-        var map = new kakao.maps.Map(mapContainer, mapOption); 
-    
-        // 마커가 표시될 위치입니다 
-        var markerPosition  = new kakao.maps.LatLng(venueLat, venueLng); 
-    
-        // 마커를 생성합니다
-        var marker = new kakao.maps.Marker({
-            position: markerPosition
-        });
-    
-        // 마커가 지도 위에 표시되도록 설정합니다
-        marker.setMap(map);
-    </script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(37.5505, 126.9395),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+	</script>
     
 </body>
 </html>
