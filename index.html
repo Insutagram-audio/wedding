@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>우리의 결혼식에 초대합니다</title>
+    <title>유인수❤️임예슬 결혼합니다</title>
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 구글 폰트 -->
@@ -177,9 +178,7 @@
         <p class="text-sm text-gray-600 mb-6">서울 마포구 백범로 23 케이터틀</p>
         
         <!-- 지도 영역 (임시 회색 박스, 실제 지도 코드 삽입 필요) -->
-        <div class="bg-gray-300 w-full h-56 rounded-lg mb-4 flex items-center justify-center text-gray-500 shadow-inner">
-            지도 영역 (카카오/네이버 지도 스크립트 삽입)
-        </div>
+       <div id="map" class="w-full h-56 rounded-lg mb-4 shadow-inner relative z-0"></div>
 
         <!-- 내비게이션 앱 링크 버튼 -->
         <div class="flex justify-center gap-2 mb-10">
@@ -591,5 +590,35 @@
             uploadBtn.classList.remove('opacity-50', 'cursor-not-allowed');
         }
     </script>
+
+    <!-- 🚨 1. 복사해둔 JavaScript 키를 YOUR_KAKAO_APP_KEY 부분에 넣으세요 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f47559d3c714daa3615d14ac11ed3fe8"></script>
+    
+    <script>
+        // 🚨 2. 예식장의 실제 위도(lat)와 경도(lng) 숫자로 변경하세요
+        var venueLat = 37.549; // 예시 위도
+        var venueLng = 126.938; // 예시 경도
+    
+        var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
+        var mapOption = { 
+            center: new kakao.maps.LatLng(venueLat, venueLng), // 지도의 중심좌표
+            level: 4 // 지도의 확대 레벨 (숫자가 작을수록 확대됨)
+        };
+    
+        // 지도를 생성합니다
+        var map = new kakao.maps.Map(mapContainer, mapOption); 
+    
+        // 마커가 표시될 위치입니다 
+        var markerPosition  = new kakao.maps.LatLng(venueLat, venueLng); 
+    
+        // 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+            position: markerPosition
+        });
+    
+        // 마커가 지도 위에 표시되도록 설정합니다
+        marker.setMap(map);
+    </script>
+    
 </body>
 </html>
