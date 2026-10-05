@@ -2,11 +2,11 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>우리의 결혼식에 초대합니다</title>
-    <!-- Tailwind CSS (레이아웃 및 스타일링) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 구글 폰트 (고딕, 명조, 영문 필기체) -->
+    <!-- 구글 폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Serif+KR:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Gowun Dodum', sans-serif; background-color: #FAFAF8; color: #333; }
@@ -20,19 +20,19 @@
 </head>
 <body class="max-w-md mx-auto bg-white shadow-xl min-h-screen relative pb-10">
 
-    <!-- 메인 타이틀 (Hero Section) -->
+    <!-- 메인 타이틀 -->
     <header class="text-center py-24 bg-pink-light">
         <div class="mb-6">
             <h1 class="script text-6xl text-gold mb-4">Jiwon & Minsoo</h1>
             <p class="serif text-xl font-bold tracking-widest text-gray-700">지원 그리고 민수</p>
         </div>
         <p class="text-gray-500 mt-8 leading-relaxed">
-            2027년 4월 3일 토요일 오후 15시30분<br>
-            신촌 케이터틀, 컨벤션홀
+            2026년 10월 24일 토요일 오후 1시<br>
+            더 로맨틱 하우스 2층, 그랜드홀
         </p>
     </header>
 
-    <!-- 인사말 (Greeting) -->
+    <!-- 인사말 -->
     <section class="py-16 px-8 text-center">
         <h2 class="script text-4xl text-gold mb-6">Invitation</h2>
         <p class="leading-loose text-gray-600">
@@ -45,17 +45,56 @@
         </p>
     </section>
 
-    <!-- 갤러리 (Gallery) -->
+    <!-- 갤러리 영역 -->
     <section class="py-16 px-6 bg-pink-light">
         <h2 class="script text-4xl text-gold mb-8 text-center">Gallery</h2>
-        <div class="grid grid-cols-2 gap-3">
-            <div class="bg-gray-200 h-48 rounded-lg flex items-center justify-center text-gray-400 overflow-hidden shadow">사진 1</div>
-            <div class="bg-gray-200 h-48 rounded-lg flex items-center justify-center text-gray-400 overflow-hidden shadow">사진 2</div>
-            <div class="col-span-2 bg-gray-200 h-64 rounded-lg flex items-center justify-center text-gray-400 overflow-hidden shadow">가로형 사진 3</div>
+        
+        <div id="galleryGrid" class="grid grid-cols-3 gap-2 mb-6">
+            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=1" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
+            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=2" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
+            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=3" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
+            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=4" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
+            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=5" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
+            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=6" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
+            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=7" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
+            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=8" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
+            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=9" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
+            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=10" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
+            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=11" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
+            <div class="gallery-item aspect-square overflow-hidden bg-gray-200 cursor-pointer"><img src="https://picsum.photos/400/400?random=12" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onclick="openModal(this)"></div>
+        </div>
+
+        <div class="text-center">
+            <button id="loadMoreBtn" onclick="showAllPhotos()" class="px-8 py-2.5 border border-[#D4A373] text-[#D4A373] rounded-full text-sm font-bold hover:bg-[#D4A373] hover:text-white transition shadow-sm">
+                사진 더보기
+            </button>
         </div>
     </section>
 
-    <!-- 사진 업로드 이벤트 (여러 장 동시 업로드) -->
+    <!-- 오시는 길 -->
+    <section class="py-16 px-8 text-center">
+        <h2 class="script text-4xl text-gold mb-6">Location</h2>
+        <p class="font-bold text-lg mb-2">더 로맨틱 하우스</p>
+        <p class="text-sm text-gray-600 mb-6">서울 강남구 웨딩로 123, 2층 그랜드홀</p>
+        <div class="bg-gray-300 w-full h-48 rounded-lg flex items-center justify-center text-gray-500 shadow-inner">
+            지도(약도) 영역
+        </div>
+    </section>
+
+    <!-- 참석 여부 (RSVP) -->
+    <section class="py-16 px-8 bg-pink-light text-center">
+        <h2 class="serif text-2xl text-gold mb-4 font-bold">RSVP</h2>
+        <p class="mb-8 text-gray-600 text-sm leading-relaxed">
+            결혼식에 참석해주시는 분들께<br>
+            최선의 준비를 다하기 위해<br>
+            참석 여부를 여쭙고 있습니다.
+        </p>
+        <a href="#" target="_blank" class="inline-block px-10 py-4 bg-gray-800 text-white rounded-full font-bold shadow-lg hover:bg-gray-700 transition">
+            참석 여부 전달하기
+        </a>
+    </section>
+
+    <!-- 🌟 사진 업로드 이벤트 (제일 아래로 이동) -->
     <section class="py-16 px-6 text-center">
         <h2 class="serif text-2xl text-gold mb-3 font-bold">📸 웨딩 스냅 콘테스트</h2>
         <p class="text-sm text-gray-500 mb-8 leading-relaxed">
@@ -68,7 +107,6 @@
             <input type="text" id="uploaderName" placeholder="예: 홍길동" class="w-full px-4 py-3 border border-gray-200 rounded-xl mb-4 focus:outline-none focus:border-[#D4A373] focus:ring-1 focus:ring-[#D4A373]">
             
             <label class="block text-sm text-gray-600 mb-1 ml-1">사진 선택 (여러 장 가능)</label>
-            <!-- multiple 속성이 추가되어 여러 장 선택이 가능합니다 -->
             <input type="file" id="photoInput" accept="image/*" multiple class="w-full mb-6 text-sm text-gray-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-[#D4A373] hover:file:bg-pink-100 cursor-pointer border border-gray-200 rounded-xl p-1">
             
             <button id="uploadBtn" onclick="uploadMultiplePhotos()" class="w-full bg-gold hover-bg-gold text-white py-3.5 rounded-xl font-bold transition duration-300 shadow-md">
@@ -78,39 +116,61 @@
         </div>
     </section>
 
-    <!-- 오시는 길 (Location) -->
-    <section class="py-16 px-8 bg-pink-light text-center">
-        <h2 class="script text-4xl text-gold mb-6">Location</h2>
-        <p class="font-bold text-lg mb-2">신촌 케이터틀 컨벤션홀</p>
-        <p class="text-sm text-gray-600 mb-6">서울 마포구 백범로 23 케이터틀</p>
-        <div class="bg-gray-300 w-full h-48 rounded-lg flex items-center justify-center text-gray-500 shadow-inner">
-            지도(약도) 영역
-        </div>
-    </section>
-
-    <!-- 참석 여부 (RSVP) -->
-    <section class="py-16 px-8 text-center">
-        <h2 class="serif text-2xl text-gold mb-4 font-bold">RSVP</h2>
-        <p class="mb-8 text-gray-600 text-sm leading-relaxed">
-            결혼식에 참석해주시는 분들께<br>
-            최선의 준비를 다하기 위해<br>
-            참석 여부를 여쭙고 있습니다.
-        </p>
-        <a href="#" target="_blank" class="inline-block px-10 py-4 bg-gray-800 text-white rounded-full font-bold shadow-lg hover:bg-gray-700 transition">
-            참석 여부 전달하기
-        </a>
-    </section>
-
     <footer class="text-center pb-8 pt-4 text-gray-400 text-xs">
         <p>Made with ❤️ for Jiwon & Minsoo</p>
     </footer>
 
-    <!-- 자바스크립트 (사진 여러 장 비동기 업로드 기능) -->
+    <!-- 사진 원본 보기 모달창 -->
+    <div id="photoModal" class="fixed inset-0 bg-black bg-opacity-95 z-50 hidden flex-col items-center justify-center touch-none" onclick="closeModal()">
+        <button class="absolute top-6 right-6 text-white text-5xl font-light hover:text-gray-300 z-50">&times;</button>
+        <img id="modalImg" src="" alt="확대사진" class="max-w-[95%] max-h-[95%] object-contain pointer-events-none select-none">
+    </div>
+
+    <!-- 자바스크립트 -->
     <script>
-        // 🚨 중요: 정상 작동을 확인하셨던 구글 Apps Script의 '웹 앱 URL'을 반드시 여기에 다시 넣어주세요! 🚨
+        document.addEventListener('DOMContentLoaded', () => {
+            const items = document.querySelectorAll('.gallery-item');
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            
+            items.forEach((item, index) => {
+                if(index >= 9) {
+                    item.classList.add('hidden');
+                }
+            });
+
+            if(items.length <= 9) {
+                loadMoreBtn.classList.add('hidden');
+            }
+        });
+
+        function showAllPhotos() {
+            const items = document.querySelectorAll('.gallery-item');
+            items.forEach(item => item.classList.remove('hidden')); 
+            document.getElementById('loadMoreBtn').classList.add('hidden'); 
+        }
+
+        function openModal(imgElement) {
+            const modal = document.getElementById('photoModal');
+            const modalImg = document.getElementById('modalImg');
+            
+            modalImg.src = imgElement.src;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('photoModal');
+            
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        // 🚨 아래 SCRIPT_URL에 기존에 성공하셨던 '웹 앱 URL'을 다시 넣어주시는 것 잊지 마세요!
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzXtlEk6tzkMgl8hWLC7FcFBjSz8XzbxpKANiStpbB6OjfwtpXOe5u1iMPq0f3N_FY5WQ/exec'; 
         
-        // 파일을 Base64로 읽어주는 보조 함수
         function readFileAsBase64(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -120,7 +180,6 @@
             });
         }
 
-        // 여러 장 업로드 메인 함수
         async function uploadMultiplePhotos() {
             const nameInput = document.getElementById('uploaderName').value;
             const fileInput = document.getElementById('photoInput');
@@ -137,7 +196,6 @@
                 return;
             }
 
-            // 버튼 잠금 및 상태 표시
             uploadBtn.innerText = '업로드 중... 잠시만 기다려주세요 ⏳';
             uploadBtn.disabled = true;
             uploadBtn.classList.add('opacity-50', 'cursor-not-allowed');
@@ -146,7 +204,6 @@
             let successCount = 0;
             let failCount = 0;
 
-            // 선택된 사진을 한 장씩 순서대로 구글 서버에 전송합니다
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
                 statusDiv.innerText = `사진 전송 중... (${i + 1}/${files.length})`;
@@ -178,19 +235,16 @@
                 }
             }
 
-            // 모든 사진 전송 완료 후 결과 표시
             if (failCount === 0) {
                 statusDiv.innerText = `🎉 총 ${successCount}장의 사진 업로드가 완료되었습니다!`;
                 statusDiv.className = 'mt-4 text-center text-sm text-green-600 font-bold';
-                // 폼 초기화
                 document.getElementById('uploaderName').value = '';
                 fileInput.value = '';
             } else {
-                statusDiv.innerText = `⚠️ ${successCount}장 성공, ${failCount}장 실패했습니다. (용량이 너무 큰 사진은 제외될 수 있습니다)`;
+                statusDiv.innerText = `⚠️ ${successCount}장 성공, ${failCount}장 실패했습니다. (용량 초과 의심)`;
                 statusDiv.className = 'mt-4 text-center text-sm text-red-500 font-bold';
             }
 
-            // 버튼 잠금 해제
             uploadBtn.innerText = '사진 업로드하기';
             uploadBtn.disabled = false;
             uploadBtn.classList.remove('opacity-50', 'cursor-not-allowed');
