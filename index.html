@@ -50,6 +50,16 @@
 </head>
 <body class="max-w-md mx-auto bg-white shadow-xl min-h-screen relative pb-10" oncontextmenu="return false;" ondragstart="return false;" onselectstart="return false;">
 
+	<!-- 🌟 배경음악 오디오 (화면엔 안 보임) -->
+    <audio id="bgmAudio" loop>
+        <source src="bgm.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 🌟 화면 우측 하단에 둥둥 떠있는 음악 버튼 -->
+    <button id="musicBtn" onclick="toggleMusic()" class="fixed bottom-6 right-6 z-40 bg-white bg-opacity-90 w-12 h-12 rounded-full shadow-lg border border-pink-100 flex items-center justify-center text-2xl transition-transform hover:scale-110">
+        🔈
+    </button>
+	
     <!-- 1. 메인 화면 -->
     <header class="text-center pt-12 pb-16 ">
         <h2 class="script text-2xl text-gold mb-6 tracking-[0.2em] ">Wedding Invitation</h2>
@@ -689,6 +699,37 @@
             }
         }
 
+
+		// -------------------------
+        // 배경음악 재생 및 정지 기능
+        // -------------------------
+        let isMusicPlaying = false;
+        const bgm = document.getElementById('bgmAudio');
+        const musicBtn = document.getElementById('musicBtn');
+
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                bgm.pause();
+                musicBtn.innerHTML = '🔈'; // 정지 아이콘
+            } else {
+                bgm.play();
+                musicBtn.innerHTML = '🎵'; // 재생 아이콘
+            }
+            isMusicPlaying = !isMusicPlaying;
+        }
+
+        // 하객이 화면 아무 곳이나 처음 터치했을 때 자연스럽게 음악 켜기
+        document.body.addEventListener('touchstart', function() {
+            if (!isMusicPlaying) {
+                bgm.play().then(() => {
+                    isMusicPlaying = true;
+                    musicBtn.innerHTML = '🎵';
+                }).catch(error => {
+                    // 브라우저 정책상 막힌 경우 (버튼을 직접 누르도록 유도)
+                    console.log('자동 재생이 차단되었습니다.');
+                });
+            }
+        }, { once: true }); // 이 동작은 처음 한 번만 실행됨
 		
     </script>
 
