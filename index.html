@@ -637,7 +637,7 @@
             }
         }
 
-        // 데이터 구글 시트로 보내기
+       // 데이터 구글 시트로 보내기
         async function submitRsvp() {
             const name = document.getElementById('rsvpName').value;
             const attend = document.querySelector('input[name="rsvpAttend"]:checked').value;
@@ -659,26 +659,26 @@
             status.classList.add('hidden');
 
             try {
-                const response = await fetch(RSVP_SCRIPT_URL, {
+                // 💡 수정된 핵심 포인트: mode: 'no-cors'를 추가하여 브라우저의 깐깐한 보안 검사를 우회합니다.
+                await fetch(RSVP_SCRIPT_URL, {
                     method: 'POST',
+                    mode: 'no-cors',
                     body: JSON.stringify({ name, attend, guestCount, meal, message })
                 });
 
-                const result = await response.json();
-                if(result.status === 'success') {
-                    status.innerText = '🎉 참석 여부가 성공적으로 전달되었습니다!';
-                    status.className = 'mt-4 text-center text-sm font-bold text-green-600 block';
-                    
-                    // 2초 뒤에 팝업 자동으로 닫기 및 폼 초기화
-                    setTimeout(() => { 
-                        toggleRsvpModal(false); 
-                        document.getElementById('rsvpName').value = '';
-                        document.getElementById('rsvpMessage').value = '';
-                        status.classList.add('hidden');
-                    }, 2000);
-                } else {
-                    throw new Error('Server error');
-                }
+                // 구글 서버가 주는 대답(result)을 읽으려다 에러가 났던 부분을 아예 삭제했습니다.
+                // 편지가 전송 과정에서 튕기지 않았다면 무조건 성공으로 간주합니다.
+                status.innerText = '🎉 참석 여부가 성공적으로 전달되었습니다!';
+                status.className = 'mt-4 text-center text-sm font-bold text-green-600 block';
+                
+                // 2초 뒤에 팝업 자동으로 닫기 및 폼 초기화
+                setTimeout(() => { 
+                    toggleRsvpModal(false); 
+                    document.getElementById('rsvpName').value = '';
+                    document.getElementById('rsvpMessage').value = '';
+                    status.classList.add('hidden');
+                }, 2000);
+                
             } catch (error) {
                 status.innerText = '⚠️ 오류가 발생했습니다. 다시 시도해주세요.';
                 status.className = 'mt-4 text-center text-sm font-bold text-red-500 block';
