@@ -50,14 +50,19 @@
 </head>
 <body class="max-w-md mx-auto bg-white shadow-xl min-h-screen relative pb-10" oncontextmenu="return false;" ondragstart="return false;" onselectstart="return false;">
 
-	<!-- 🌟 배경음악 오디오 (화면엔 안 보임) -->
+	<!-- 🌟 배경음악 오디오 (반드시 딱 하나만 있어야 합니다!) -->
     <audio id="bgmAudio" loop>
         <source src="bgm.mp3" type="audio/mpeg">
-		<!-- 🌟 배경음악 오디오 (자동재생 추가) -->
-	    <audio id="bgmAudio" loop autoplay>
-	        <source src="bgm.mp3" type="audio/mpeg">
-	    </audio>
     </audio>
+
+    <!-- 🌟 화면 우측 하단에 둥둥 떠있는 음악 버튼 (작은 사이즈) -->
+    <button id="musicBtn" onclick="toggleMusic()" class="fixed bottom-5 right-5 z-40 bg-white bg-opacity-90 w-9 h-9 rounded-full shadow-lg border border-pink-100 flex items-center justify-center text-sm transition-transform hover:scale-110">
+        🔈
+    </button>
+
+	
+
+	
 
     <!-- 🌟 화면 우측 하단에 둥둥 떠있는 음악 버튼 -->
     <button id="musicBtn" onclick="toggleMusic()" class="fixed bottom-5 right-5 z-40 bg-white bg-opacity-90 w-9 h-9 rounded-full shadow-lg border border-pink-100 flex items-center justify-center text-sm transition-transform hover:scale-110">
@@ -290,7 +295,7 @@
     </section>
 
 	<!-- 참석 여부 (RSVP) -->
-    <section class="py-16 px-8 bg-pink-light text-center fade-in-section">
+    <section class="py-16 px-8 bg-white text-center fade-in-section">
         <h2 class="serif text-2xl text-gold mb-4 font-bold">RSVP</h2>
         <p class="mb-8 text-gray-600 text-sm leading-relaxed">
             결혼식에 참석해주시는 분들께<br>
