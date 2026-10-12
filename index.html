@@ -59,7 +59,7 @@
         .envelope-body-bottom { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-left: 140px solid transparent; border-right: 140px solid transparent; border-bottom: 100px solid #e8d5c4; z-index: 6; }
         
         .envelope-seal { position: absolute; top: 100px; left: 50%; transform: translate(-50%, -50%); font-size: 2.5rem; z-index: 11; transition: opacity 0.3s; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-       	.letter-preview { position: absolute; top: 5px; left: 10px; right: 10px; bottom: 10px; background-color: white; border-radius: 4px; z-index: 1; transition: transform 1s ease-in-out, opacity 1s ease-in-out; display: flex; align-items: center; justify-content: center; color: #D4A373; font-size: 1.2rem; font-weight: bold; }
+       	.letter-preview { position: absolute; top: 5px; left: 10px; right: 10px; bottom: 10px; background-color: white; border-radius: 4px; z-index: 1; transition: transform 1s ease-in-out, opacity 1s ease-in-out; overflow: hidden; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
 		
     </style>
 </head>
@@ -73,7 +73,9 @@
         <!-- 편지 봉투 모양 -->
         <div class="envelope-wrapper mb-12">
             <div id="envelope-flap" class="envelope-flap"></div>
-            <div class="letter-preview serif">초대장</div>
+            <div class="letter-preview">
+    			<img src="invite_photo.jpg" alt="실물 청첩장" class="w-full h-full object-cover">
+			</div>
             <div class="envelope-body-left"></div>
             <div class="envelope-body-right"></div>
             <div class="envelope-body-bottom"></div>
