@@ -59,8 +59,7 @@
         .envelope-body-bottom { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-left: 140px solid transparent; border-right: 140px solid transparent; border-bottom: 100px solid #e8d5c4; z-index: 6; }
         
         .envelope-seal { position: absolute; top: 100px; left: 50%; transform: translate(-50%, -50%); font-size: 2.5rem; z-index: 11; transition: opacity 0.3s; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .letter-preview { position: absolute; top: 5px; left: 10px; right: 10px; bottom: 10px; background-color: white; border-radius: 4px; z-index: 1; transition: transform 0.8s ease-in-out; display: flex; align-items: center; justify-content: center; color: #D4A373; font-size: 1.2rem; font-weight: bold; }
-        .envelope-flap.open ~ .letter-preview { transform: translateY(-50px); } /* 뚜껑이 열리면 편지지가 살짝 올라오는 효과 */
+       	.letter-preview { position: absolute; top: 5px; left: 10px; right: 10px; bottom: 10px; background-color: white; border-radius: 4px; z-index: 1; transition: transform 1s ease-in-out, opacity 1s ease-in-out; display: flex; align-items: center; justify-content: center; color: #D4A373; font-size: 1.2rem; font-weight: bold; }
 		
     </style>
 </head>
@@ -74,7 +73,7 @@
         <!-- 편지 봉투 모양 -->
         <div class="envelope-wrapper mb-12">
             <div id="envelope-flap" class="envelope-flap"></div>
-            <div class="letter-preview serif">Wedding Invitation</div>
+            <div class="letter-preview serif">초대장</div>
             <div class="envelope-body-left"></div>
             <div class="envelope-body-right"></div>
             <div class="envelope-body-bottom"></div>
@@ -329,7 +328,7 @@
 
 	<!-- 참석 여부 (RSVP) -->
     <section class="py-16 px-8 bg-white text-center fade-in-section">
-        <h2 class="serif text-2xl text-gold mb-4 font-bold">RSVP</h2>
+        <h2 class="serif text-2xl text-gold mb-4 font-bold">참석여부</h2>
         <p class="mb-8 text-gray-600 text-sm leading-relaxed">
             결혼식에 참석해주시는 분들께<br>
             최선의 준비를 다하기 위해<br>
@@ -786,30 +785,38 @@
         document.addEventListener('scroll', unlockAudio);
 
 
-		// -------------------------
-        // 오프닝 봉투 애니메이션
+	// -------------------------
+        // 오프닝 봉투 애니메이션 (스케일업 & 페이드아웃 적용)
         // -------------------------
         function openEnvelope() {
             // 1. 하트 스티커 사라짐
             document.getElementById('envelope-seal').style.opacity = '0';
             
-            // 2. 봉투 덮개 열리기 (CSS 회전 애니메이션 시작)
+            // 2. 봉투 덮개 열리기
             document.getElementById('envelope-flap').classList.add('open');
             
-            // 3. 버튼 누르는 즉시 배경음악 재생 (확실하게 실행됨)
+            // 3. 버튼 누르는 즉시 배경음악 재생
             if (!isMusicPlaying) {
                 bgm.play().catch(e => console.log('음악 재생 오류:', e));
                 isMusicPlaying = true;
                 musicBtn.innerHTML = '🎵';
             }
             
-            // 4. 1.2초 뒤에 커버 화면 부드럽게 사라지게 하고 스크롤 잠금 해제
+            // 4. 🚨 [추가된 마법] 0.5초 뒤(덮개가 열리는 중) 편지지가 커지면서 페이드 아웃
+            setTimeout(() => {
+                const letter = document.querySelector('.letter-preview');
+                letter.style.zIndex = '20'; // 편지지를 봉투 앞쪽으로 빼기
+                letter.style.transform = 'translateY(-120px) scale(2)'; // 위로 솟구치며 2배로 커짐!
+                letter.style.opacity = '0'; // 점점 투명해짐 (페이드 아웃)
+            }, 500);
+            
+            // 5. 1.5초 뒤 전체 커버 화면이 사라지며 진짜 청첩장이 페이드 인!
             setTimeout(() => {
                 const cover = document.getElementById('envelope-cover');
                 cover.style.opacity = '0';
                 cover.style.visibility = 'hidden';
-                document.body.classList.remove('locked'); // 하객이 스크롤 할 수 있게 풀어줌
-            }, 1200);
+                document.body.classList.remove('locked'); // 스크롤 잠금 해제
+            }, 1500);
         }
 			
     </script>
