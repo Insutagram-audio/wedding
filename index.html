@@ -802,17 +802,17 @@
                 musicBtn.innerHTML = '🎵';
             }
             
-            // 4. 0.5초 뒤 편지지가 화면을 꽉 채우고도 남을 만큼 거대해지며 페이드 아웃
-            setTimeout(() => {
-                const letter = document.querySelector('.letter-preview');
-                letter.style.zIndex = '20'; 
+            // // 4. 0.5초 뒤 편지지가 화면을 꽉 채우고도 남을 만큼 거대해지며 페이드 아웃
+            // setTimeout(() => {
+            //     const letter = document.querySelector('.letter-preview');
+            //     letter.style.zIndex = '20'; 
                 
-                // 💡 핵심 변경 포인트: scale(2)였던 부분을 scale(5)로 대폭 키웠습니다!
-                // 위로 살짝 올라오면서(-120px) 5배로 커져 화면을 완전히 덮어버립니다.
-                letter.style.transform = 'translateY(-120px) scale(5)'; 
+            //     // 💡 핵심 변경 포인트: scale(2)였던 부분을 scale(5)로 대폭 키웠습니다!
+            //     // 위로 살짝 올라오면서(-120px) 5배로 커져 화면을 완전히 덮어버립니다.
+            //     letter.style.transform = 'translateY(-120px) scale(5)'; 
                 
-                letter.style.opacity = '0'; // 점점 투명해짐
-            }, 500);
+            //     letter.style.opacity = '0'; // 점점 투명해짐
+            // }, 500);
             
             // 5. 2.5초 뒤 전체 커버 화면이 사라지며 진짜 청첩장이 페이드 인!
             setTimeout(() => {
