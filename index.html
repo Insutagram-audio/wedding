@@ -471,9 +471,9 @@
             galleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
 
             items.forEach((item, index) => {
-                if(index >= 9) item.classList.add('hidden');
+                if(index >= 12) item.classList.add('hidden');
             });
-            if(items.length <= 9 && loadMoreBtn) loadMoreBtn.classList.add('hidden');
+            if(items.length <= 12 && loadMoreBtn) loadMoreBtn.classList.add('hidden');
         });
 
         // -------------------------
